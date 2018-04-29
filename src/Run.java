@@ -95,10 +95,11 @@ public class Run {
         }
 
         int row = 0;
+        int column = 0;
         boolean sw = true;
         //while(index != Contact.inputString.size()){
         while (sw) {
-            int column = 0;
+
             if (Contact.inputString.size() == index) {
                 column = 20;
                 System.out.print("마지막");
@@ -107,31 +108,28 @@ public class Run {
                 } else if (index <= Contact.inputString.size()-2) {
                     if (Contact.inputString.get(index+1).equals(" ")) {
                         System.out.print("공백");
-                        if(column == 0){
+                        if(row == 0){
+                            System.out.println(row);
                             currentWord = Contact.inputString.get(index);
                             System.out.print(Contact.inputString.get(index)+" ");
                             column = getColumn(currentWord);
                             System.out.println("index --------->"+index);
+
                         }else{
+                            System.out.println(row);
                             currentWord = Contact.inputString.get(index);
                             System.out.print(Contact.inputString.get(index)+" ");
                             column = 20;
                             System.out.println("index --------->"+index);
-
+                            index += 2;
                         }
-                        index += 2;
-
-                   /* column = 20;
-                    System.out.print("공백");
-                    System.out.println("index --------->"+index);
-                    index+=2;*/
                     } else {
-                    System.out.println("eeeeeeeeeeeeeeeeeeeeeeeee");
-                    currentWord = Contact.inputString.get(index);
-                    System.out.print(Contact.inputString.get(index)+" ");
-                    column = getColumn(currentWord);
-                    System.out.println("index --------->"+index);
-                    index++;
+                        System.out.println("eeeeeeeeeeeeeeeeeeeeeeeee");
+                        currentWord = Contact.inputString.get(index);
+                        System.out.print(Contact.inputString.get(index)+" ");
+                        column = getColumn(currentWord);
+                        System.out.println("index --------->"+index);
+                        index++;
                 }
 
             } else {
