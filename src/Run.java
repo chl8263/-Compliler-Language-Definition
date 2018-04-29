@@ -18,7 +18,7 @@ public class Run {
 
    private int table[][] = {
            // letter(0) , digit(1) , +(2) , -(3) , *(4) , /(5) , %(6) , &(7) , !(8) ,=(9) , <(10) , >(11) , |(12)  , ','(13) , ((14) , )(15) , { , } , [ , ] , "\"" , "'"
-           {31, 33, 1, 2, 3, 6, 9, 10, 12, 13, 16, 19, 22, 24, 25, 26, 27, 28, 29, 30, 35,37, 0, 0},             //Start (0)
+           {31, 33, 1, 2, 3, 6, 9, 10, 12, 13, 16, 19, 22, 24, 25, 26, 27, 28, 29, 30, 35,37, 40, 0},             //Start (0)
            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},  //_S_plus (1)
            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},  //_S_minus (2)
 
@@ -77,6 +77,7 @@ public class Run {
            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},  //_G_char (38)
 
            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},  //_Keyword (39)
+           {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},  //_semicolon (40)
 
    };
 
@@ -87,7 +88,7 @@ public class Run {
     }
     public void start() {
         System.out.println("mini c");
-        String result = "";
+        //String result = "";
         while (true) {
             String input = scanner.nextLine();
             if (input.equals("done")) {
@@ -137,7 +138,7 @@ public class Run {
                         System.out.print(Contact.inputString.get(index) + " ");
                         column = getColumn(currentWord);
                         System.out.println("index --------->" + index);
-
+                        result = result.substring(0,result.length()-1);
                     } else {
                         System.out.println(row+ "");
                         currentWord = Contact.inputString.get(index);
@@ -145,6 +146,7 @@ public class Run {
                         column = 23;
                         System.out.println("index --------->" + index);
                         index ++;
+
                     }
                 }else {
                     System.out.println("eeeeeeeeeeeeeeeeeeeeeeeee");
@@ -252,19 +254,21 @@ public class Run {
             if (state == 32){
                 result += currentWord;
                 if(Arrays.binarySearch(keyword,result)>0){
-                    models.add(new Model("keyword", 25));
+                    models.add(new Model("keyword", 25 , result));
                     result = "";
                 }else{
                     models.add(new Model("identifier", 26 , result));
                     result = "";
-                }
-            } else if(state == 34){
-                models.add(new Model("literal", 27 , result));
+            }
+        } else if(state == 34){
+            models.add(new Model("literal", 27 , result));
                 result = "";
             } else if(state == 36){
+                result = result.substring(1,result.length());
                 models.add(new Model("string",28,result));
                 result = "";
             } else if(state == 38){
+                result = result.substring(1,result.length());
                 models.add(new Model("char",29,result));
                 result = "";
             } else if(state == 1 ){
