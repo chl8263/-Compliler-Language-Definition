@@ -4,9 +4,11 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Run {
-    int index= 0;
-    String currentWord ;
-    private Boolean inputstate = true;
+
+    //test
+    int index= 0;String currentWord ;
+    private
+     Boolean inputstate = true;
     private Scanner scanner;
     private String [] keyword = {"void","int","char","float","double","if","else","while","for","switch","case","break","return"};
     private String [] specialSymbols = {"+","-","*","/","%","&&","!","=","==","<",">","<=",">=","||","//","/*","*/",",","(",")","{","}","[","]"};
