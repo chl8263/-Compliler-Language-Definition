@@ -27,7 +27,7 @@ public class Run {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},  //_S_plus (1)
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},  //_S_minus (2)
 
-            {4, 4, 4, 4, 4, 5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 4},  //_multi_in (3) ===============
+            {4, 4, 4, 4, 4, 5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 4},  //_S_multi_in (3) ===============
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},  //_S_multi (4)
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},  //_S_end_remark (5)
 
@@ -160,11 +160,6 @@ public class Run {
                 } else if (Arrays.binarySearch(specialSymbols, Contact.inputString.get(index)) <= 0 && Arrays.binarySearch(specialSymbols, Contact.inputString.get(index + 1)) > 0) {
                     out.println("other -> special_symbol");
                     if (row == 0) {
-                        /*out.println(row + "");
-                        currentWord = Contact.inputString.get(index);
-                        out.print(Contact.inputString.get(index) + " ");
-                        column = getColumn(currentWord);
-                        out.println("index --------->" + index);*/
                         if (isdigit(Contact.inputString.get(index))) {
                             out.println(row + "");
                             currentWord = Contact.inputString.get(index);
@@ -186,9 +181,6 @@ public class Run {
                         out.print(Contact.inputString.get(index) + " ");
                         column = 25;
                         out.println("index --------->" + index);
-                      /*  if (result.length() >= 1) {
-                            result = result.substring(0, result.length() - 1);
-                        }*/
                         index++;
                     }
                 }else {
@@ -236,7 +228,6 @@ public class Run {
                         }
                     }
                 }
-
             }
         }
         System.out.println("=======================================================");
@@ -256,14 +247,7 @@ public class Run {
         if (state == 3 || state == 6 || state == 10 || state == 13 || state == 16 || state == 19 || state == 22 || state == 31 || state == 33 || state == 35 || state == 37 || state == 41 || state == 43) {
             result += currentWord;
             System.out.println("result------>" + result);
-            /*if(state == 41){
-                System.out.println("???????????");
-                char c = result.charAt(result.length()-1);
-                if(c=='x'){
-                    return 43;
-                }
 
-            }*/
             return state;
         } else {
             if (state == 32) {
@@ -308,14 +292,14 @@ public class Run {
                 result = "";
             } else if (state == 5) {
                 result += currentWord;
-                models.add(new Model("specialSymbol", 3));
+                models.add(new Model("specialSymbol", 16));
                 result = "";
             } else if (state == 7) {
                 models.add(new Model("specialSymbol", 4));
                 result = "";
             } else if (state == 8) {
                 result += currentWord;
-                models.add(new Model("specialSymbol", 4));
+                models.add(new Model("specialSymbol", 15,result));
                 result = "";
             } else if (state == 9) {
                 models.add(new Model("specialSymbol", 5));
@@ -348,34 +332,28 @@ public class Run {
                 models.add(new Model("specialSymbol", 14));
                 result = "";
             } else if (state == 24) {
-                models.add(new Model("specialSymbol", 15));
-                result = "";
-            } else if (state == 25) {
-                models.add(new Model("specialSymbol", 16));
-                result = "";
-            } else if (state == 26) {
                 models.add(new Model("specialSymbol", 17));
                 result = "";
-            } else if (state == 27) {
+            } else if (state == 25) {
                 models.add(new Model("specialSymbol", 18));
                 result = "";
-            } else if (state == 28) {
+            } else if (state == 26) {
                 models.add(new Model("specialSymbol", 19));
                 result = "";
-            } else if (state == 29) {
+            } else if (state == 27) {
                 models.add(new Model("specialSymbol", 20));
                 result = "";
-            } else if (state == 30) {
+            } else if (state == 28) {
                 models.add(new Model("specialSymbol", 21));
                 result = "";
-            }/*else if(state == 1 ){
-                models.add(new Model("specialSymbol",22,"\""));
-                result = "";
-            }else if(state == 1 ){
-                models.add(new Model("specialSymbol",23,"'"));
-                result = "";
-            }*/ else if (state == 40) {
+            } else if (state == 29) {
                 models.add(new Model("specialSymbol", 22));
+                result = "";
+            } else if (state == 30) {
+                models.add(new Model("specialSymbol", 23));
+                result = "";
+            }else if (state == 40) {
+                models.add(new Model("specialSymbol", 24));
                 result = "";
             } else if (state == 42) {
                 result += currentWord;
@@ -410,21 +388,7 @@ public class Run {
                 }
                 models.add(new Model("literal_hexa", 27, result));
                 result = "";
-            } /*else if (state == 0) {
-                System.out.println("???????????");
-                System.out.println(result);
-                char c = result.charAt(result.length() - 1);
-
-                if (c == 'x') {
-                    return 43;
-                }
-                *//*if(result.equals("x")){
-                    return 43;
-                }*//*
-                out.println("Acc ---->" + state);
-                return 0;
-            }*/
-
+            }
             out.println("Acc ---->" + state);
             return 0;
         }
@@ -435,10 +399,8 @@ public class Run {
             if (msg.equals("0")) {
                 return 23;
             }
-
             return 1;
         } else if (msg.equals("+")) {
-
             return 2;
         } else if (msg.equals("-")) {
             return 3;
@@ -486,13 +448,6 @@ public class Run {
             if (result.equals("0")&&Contact.inputString.get(index).equals("x")) {
                 return 24;
             }
-           /* if (result.equals("0")) {
-                return 24;
-            }*/
-            /*char c = result.charAt(result.length() - 1);
-            if (c == 'x') {
-                return 43;
-            }*/
             return 0;
         }
     }
